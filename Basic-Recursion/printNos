@@ -1,0 +1,22 @@
+/*
+Problem: Print 1 To N Without Loop
+Print numbers from 1 to n without the help of loops. You only need to complete the function printNos() that takes N as parameter and prints number from 1 to N recursively.
+Don't print newline, it will be added by the driver code.
+
+Solution:
+*/
+
+class Solution
+{
+    int i=1;
+    public void printNos(int N)
+    {
+        //Your code here
+        if(i>N){
+            return;
+        }
+        System.out.print(i+" ");
+        i++;
+        printNos(N); 
+    }
+}
