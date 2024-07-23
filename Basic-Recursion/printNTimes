@@ -1,0 +1,17 @@
+/*
+Problem: Print Siddhi n times
+Print Siddhi n times without the loop.
+
+Solution:
+*/
+class Solution {
+    
+    void print(int N) {
+        // code here
+        if(N == 0){
+            return;
+        }
+        System.out.print("Siddhi"+" ");
+        print(N-1);
+    }
+}
