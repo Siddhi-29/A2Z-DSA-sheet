@@ -1,0 +1,29 @@
+/*
+Problem: Find all factorial numbers less than or equal to n
+
+A number n is called a factorial number if it is the factorial of a positive integer. For example, the first few factorial numbers are 1, 2, 6, 24, 120,
+Given a number n, the task is to return the list/vector of the factorial numbers smaller than or equal to n.
+
+Solution:
+*/
+class Solution {
+    static ArrayList<Long> factorialNumbers(long n) {
+        // code here
+        ArrayList<Long> list = new ArrayList<>();
+        for( long i = 1; i<= n; i++){
+            long k = fact(i);
+            if(k<=n){
+                list.add(k);
+            }
+            else{
+                break;
+            }
+        }
+        return list;
+    }
+    static long fact(long n){
+        if(n==1)
+            return 1;
+        return n*fact(n-1);
+    }
+}
