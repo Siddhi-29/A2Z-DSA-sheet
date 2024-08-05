@@ -1,0 +1,39 @@
+/*
+Problem: Linked List Insertion At End
+
+Given the head of a Singly Linked List and a value x, insert that value x at the end of the LinkedList and return the modified Linked List.
+
+Solution:
+*/
+
+class Node{
+    int data;
+    Node next;
+
+    Node(int x){
+        data = x;
+        next = null;
+    }
+}
+class Solution {
+    // Function to insert a node at the end of the linked list.
+    Node insertAtEnd(Node head, int x) {
+        // code here
+        Node newnode = new Node(x);
+        
+        // If the linked list is empty, make the new node the head
+        if (head == null)
+            return newnode;
+            
+        Node curr = head;
+        
+        // Traverse to the end of the list
+        while (curr.next != null) {
+            curr = curr.next;
+        }
+        
+        // Set the next of the last node to the new node
+        curr.next = newnode;
+        return head;
+    }
+}
