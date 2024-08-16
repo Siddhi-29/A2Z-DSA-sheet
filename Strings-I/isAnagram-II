@@ -1,0 +1,37 @@
+/*
+Problem: Valid Anagram
+
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+Solution:
+*/
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        Map<Character, Integer> countMap = new HashMap<>();
+
+        // Count characters in string s
+        for (char c : s.toCharArray()) {
+            countMap.put(c, countMap.getOrDefault(c, 0) + 1);
+        }
+
+        // Subtract character counts using string t
+        for (char c : t.toCharArray()) {
+            if (!countMap.containsKey(c)) {
+                return false;
+            }
+            countMap.put(c, countMap.get(c) - 1);
+            if (countMap.get(c) == 0) {
+                countMap.remove(c);
+            }
+        }
+
+        // If the map is empty, s and t are anagrams
+        return countMap.isEmpty();
+    }
+}
