@@ -1,0 +1,31 @@
+/*
+Problem: Floor in a Sorted Array
+Given a sorted array arr[] of size n without duplicates, and given a value x. Floor of x is defined as the largest element k in arr[] such that k is smaller than or equal to x. Find the index of k(0-based indexing).
+
+Solution:
+*/
+class Solution {
+
+    // Function to find floor of x
+    // arr: input array
+    // n is the size of array
+    static int findFloor(long arr[], int n, long x) {
+        int start = 0, end = arr.length - 1;
+        int result = -1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (arr[mid] == x) {
+                return mid;
+            } else if (arr[mid] < x) {
+                result = mid; // arr[mid] is a potential floor value
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        return result;
+    }
+}
