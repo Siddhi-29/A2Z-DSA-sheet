@@ -1,0 +1,29 @@
+/*
+Problem: Find Kth Rotation
+
+Given an increasing sorted rotated array arr of distinct integers. The array is right-rotated k times. Find the value of k.
+Let's suppose we have an array arr = [2, 4, 6, 9], so if we rotate it by 2 times so that it will look like this:
+After 1st Rotation : [9, 2, 4, 6]
+After 2nd Rotation : [6, 9, 2, 4]
+
+Solution:
+*/
+class Solution {
+    public int findKRotation(List<Integer> arr) {
+        // Code here
+        int start = 0, end = arr.size()-1;
+        
+        while(start < end){
+            int mid = start + (end - start)/2;
+            
+            if(arr.get(mid) > arr.get(end)){
+                start = mid+1;
+            }
+            else{
+                end = mid;
+            }
+        }
+        return start;
+        
+    }
+}
