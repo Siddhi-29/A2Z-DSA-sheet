@@ -1,0 +1,46 @@
+/*
+Problem: Delete a node in Doubly Linked List
+Given a doubly Linked list and a position. The task is to delete a node from a given position (position starts from 1) in a doubly linked list and return the head of the doubly Linked list.
+
+Solution:
+*/
+class Solution {
+    public Node deleteNode(Node head, int x) {
+        if (head == null || x <= 0) {
+            return head; // If the list is empty or the position is invalid, return the head
+        }
+
+        Node current = head;
+
+        // If the node to be deleted is the head
+        if (x == 1) {
+            head = current.next; // Move the head to the next node
+            if (head != null) {
+                head.prev = null; // Set the previous of the new head to null
+            }
+            return head;
+        }
+
+        // Traverse to the node at the given position
+        for (int i = 1; current != null && i < x; i++) {
+            current = current.next;
+        }
+
+        // If the position is more than the number of nodes
+        if (current == null) {
+            return head;
+        }
+
+        // If the node to be deleted is not the last node
+        if (current.next != null) {
+            current.next.prev = current.prev;
+        }
+
+        // If the node to be deleted is not the first node
+        if (current.prev != null) {
+            current.prev.next = current.next;
+        }
+
+        return head;
+    }
+}
