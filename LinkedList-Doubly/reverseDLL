@@ -1,0 +1,42 @@
+/*
+Problem: Reverse a Doubly Linked List
+Given a doubly linked list. Your task is to reverse the doubly linked list in-place.
+
+Solution:*/
+
+/*
+class Node
+{
+    int data;
+    Node next, prev;
+    Node(int data)
+    {
+        this.data = data;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+*/
+public static Node reverseDLL(Node  head)
+{
+    //Your code here
+    Node temp = null;
+    Node current = head;
+
+    // Swap the next and prev pointers for all nodes    
+    while (current != null) {
+        // Swap the prev and next pointers 
+        temp = current.prev;
+        current.prev = current.next;
+        current.next = temp;
+        
+        // Move to the next node in the original list (which is prev now)
+        current = current.prev;
+    }
+    // After the loop, temp will be pointing to the new head of the reversed list
+    if (temp != null) {
+        head = temp.prev;
+    }
+    return head;
+}
