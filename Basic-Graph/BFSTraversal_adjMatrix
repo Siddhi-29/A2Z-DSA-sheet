@@ -1,0 +1,34 @@
+/*
+Problem: BFS Traversal
+
+Solution:
+*/
+import java.util.*;
+
+class BFSTraversal {
+    public static void main(String[] args) {
+      int[][] adjMatrix = {{0, 0, 1, 1, 0},
+                             {0, 0, 0, 0, 0},
+                             {0, 0, 0, 0, 1},
+                             {0, 0, 0, 0, 0},
+                             {0, 1, 0, 0, 0}};
+        
+        // starting point = 0
+        bfs(0, adjMatrix);
+    }
+    public static void bfs(int start, int[][] adj) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(start);
+        int size = adj.length;
+        while(!q.isEmpty()) {   //{0}
+            int curr = q.poll();    //0
+            for( int i=0; i<size; i++) {
+                if(adj[curr][i] == 1){
+                    q.add(i);
+                }
+            }
+            System.out.print(curr+" ");
+        }
+    }
+}
+
