@@ -1,0 +1,61 @@
+/*
+Problem: Add 1 to a linked list number
+*/
+/**
+Reversing the List:
+
+Reversing simplifies the addition by allowing us to process the least significant digit (tail of the original list) first.
+Carry Propagation:
+
+Each node processes the addition of its value and the carry.
+The carry propagates to the next node if the sum exceeds 9.
+Handling Overflow:
+
+If a carry remains after processing all nodes (e.g., adding 1 to 999), a new node is created to handle this overflow.
+Restoring Order:
+
+After addition, the list is reversed back to its original order.
+*/
+class Solution {
+    public Node addOne(Node head) {
+        // code here.
+        // This simplifies addition by starting from the least significant digit, 
+        // which is now at the head after reversal.
+        Node currHead = reverse(head);
+        
+        Node curr = currHead;
+        Node prev = curr;
+        int carry = 1;           // Set 1 in carry, to add it on the least significant digit.
+        
+        // Add 1 to the digits, managing the carry as we traverse through the reversed list.
+        while(curr != null) {
+            int sum = curr.data + carry;
+            curr.data = sum%10;
+            carry = sum/10;
+            prev = curr;
+            curr = curr.next;
+        }
+        
+        // If a carry remains after traversing all nodes, create a new node to accommodate it.
+        // Cases like 999, 9999, etc
+        if(carry != 0) {
+            Node newNode = new Node(carry);
+            prev.next = newNode;
+        }
+        
+        // Reverse the list back to restore the original digit order.
+        return reverse(currHead);
+    }
+    
+    public Node reverse(Node head) {
+        Node curr = head;
+        Node prev = null;
+        while(curr != null) {
+            Node temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+}
