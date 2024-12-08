@@ -1,0 +1,80 @@
+/*
+Problem: 160. Intersection of Two Linked Lists
+Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.
+
+For example, the following two linked lists begin to intersect at node c1:
+
+
+The test cases are generated such that there are no cycles anywhere in the entire linked structure.
+
+Note that the linked lists must retain their original structure after the function returns.
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+
+
+ /**
+      -- Intution --
+      "First, calculate the lengths of both lists."
+      "Next, determine the difference in their lengths, 
+      "Move the pointer of the longer list steps ahead to align the starting points."
+      "Now traverse both lists together. If the pointers meet at a node, that node is the 
+       intersection. If they reach the end without meeting, the lists do not intersect."
+  */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+
+//"First, calculate the lengths of both lists."
+        int len1 = 0, len2 = 0;
+        ListNode tempA = headA;
+        ListNode tempB = headB;
+        while(tempA != null) {
+            len1++;
+            tempA = tempA.next;
+        }
+        while(tempB != null) {
+            len2++;
+            tempB = tempB.next;
+        }
+        
+// "Next, determine the difference in their lengths, 
+        int diff = Math.abs(len1 - len2);
+
+//      "Move the pointer of the longer list steps ahead to align the starting points."
+        tempA = headA;
+        tempB = headB;
+        if(len1 > len2) {
+            while(diff-- != 0) {
+                tempA = tempA.next;
+            }            
+        }
+        else {
+            while(diff-- != 0) {
+                tempB = tempB.next;
+            }
+        }
+
+//  Now traverse both lists together.
+        while(tempA != null && tempB != null) {
+        //If the pointers meet at a node, that node is the intersection.
+            if(tempA == tempB){
+                return tempA;
+            }
+            tempA = tempA.next;
+            tempB = tempB.next;
+        }
+    
+//  If they reach the end without meeting, the lists do not intersect.
+        return null;
+    }
+}
