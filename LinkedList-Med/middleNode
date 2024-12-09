@@ -1,0 +1,27 @@
+/*
+Problem: 876. Middle of the Linked List
+Given the head of a singly linked list, return the middle node of the linked list.
+
+If there are two middle nodes, return the second middle node.
+
+*/
+ /*
+    Initialize both the tortoise and hare pointers to the head of the list.
+    Move the hare pointer two steps at a time and the tortoise pointer one step at a time.
+    Stop when the hare pointer reaches the end (or one step before the end, in the case of even-length lists).
+    The tortoise pointer will be at the middle of the list.
+ */
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head;   //Slow pointer
+        ListNode fast = head;   //Fast pointer
+
+        while(fast != null && fast.next != null) {
+            slow = slow.next;       //Move one step
+            fast = fast.next.next;  //Move two step
+
+        }
+        return slow;        //slow is at the middle of the LL
+        
+    }
+}
