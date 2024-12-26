@@ -1,0 +1,50 @@
+/*
+Problem: Delete all occurrences of a given key in a doubly linked list
+You are given the head_ref of a doubly Linked List and a Key. Your task is to delete all occurrences of the given key if it is present and return the new DLL.
+
+Intuition:
+In a doubly linked list, each node has pointers to both its previous and next nodes. To delete nodes with a specific key:
+
+Traverse the list to find matching nodes.
+Adjust the next pointer of the previous node and the prev pointer of the next node to bypass the current node.
+If the node is the head, update the head pointer.
+This ensures the list remains intact while efficiently removing the nodes.
+*/
+
+class Solution {
+    static Node deleteAllOccurOfX(Node head, int x) {
+        // Write your code here
+        Node current = head;
+        while(current != null) {
+            // If the current node contains the key
+            if (current.data == x) {
+                // If it's the head node
+                if (current.prev == null) {
+                    head = current.next;
+                    if (head != null) {
+                        head.prev = null;
+                    }
+                } else {
+                    // Update the next pointer of the previous node
+                    current.prev.next = current.next;
+                }
+
+                // Update the prev pointer of the next node
+                if (current.next != null) {
+                    current.next.prev = current.prev;
+                }
+
+                // Move to the next node
+                Node temp = current;
+                current = current.next;
+
+                // Free memory (Java garbage collector will handle this)
+                temp.next = temp.prev = null;
+            } else {
+                // Move to the next node
+                current = current.next;
+            }
+        }
+        return head;
+    }
+}
